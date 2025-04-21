@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="POST">
+    {{ form.csrf_token }}
+
+    <h1 class="h3 mb-3 fw-normal">Регистрация в системе</h1>
+    <div>
+        {{ form.email(class="form-control my-3 p-4") }}
+        {% if form.email.errors %}
+        {% for error in form.email.errors %}
+        <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <div>
+        {{ form.password(class="form-control my-3 p-4") }}
+        {% if form.password.errors %}
+        {% for error in form.password.errors %}
+        <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <div>
+        {{ form.password2(class="form-control my-3 p-4") }}
+        {% if form.password2.errors %}
+        {% for error in form.password2.errors %}
+        <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    {{ form.submit(class="btn btn-lg btn-outline-secondary") }}
+    <p class="text-center text-uppercase text-muted pt-3">--- Или ---</p>
+    <a href="{{ url_for('login') }}" class="w-100 btn btn-lg btn-outline-primary">Войти</a>
+</form>
+{% endblock %}
