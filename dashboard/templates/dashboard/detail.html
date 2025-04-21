@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Детальная информация</title>
+{% endblock %}
+
+{% block content %}
+<h2>Детальная информация об инструменте</h2>
+<div class="row">
+    <div class="col3"></div>
+    <div class="col3">
+        Инструмент: {{ share.name }} <br>
+        Тикер: {{ share.ticker }} <br>
+        ISIN: {{ share.isin }} <br>
+        FIGI: {{ share.figi }} <br>
+        UID: {{ share.uid }} <br>
+        Текущая цена: {{share.last_price or 0}} {{ share.currency or "" }} <br>
+        Время последнего обновления: {{ share.updated_at or "Нет данных" }}
+        <br>
+        Тренд:
+        {% if share.is_trend_high is true %} Растет 📈
+        {% elif share.is_trend_high is false %} Падает 📉
+        {% else %} Нет данных
+        {% endif %}
+    </div>
+    <div class="col3"></div>
+</div>
+
+<div class="row my-3">
+    <div class="col3"></div>
+    <div class="col3">
+        <h5>Исторические данные:</h5>
+        {{ plot_div | safe }}
+    </div>
+    <div class="col3"></div>
+</div>
+
+{% endblock %}
